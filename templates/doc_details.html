@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Tweet Container Styling */
+        .tweet-container {
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tweet-container:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Profile Section */
+        .tweet-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .tweet-profile img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .tweet-profile p {
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Tweet Title and Description */
+        .tweet-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .tweet-description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Stats Section */
+        .tweet-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .tweet-stats b {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* URL Section */
+        .tweet-url {
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+            word-wrap: break-word;
+        }
+
+        .tweet-url:hover {
+            text-decoration: underline;
+        }
+
+        /* Date Section */
+        .tweet-date {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tweet-container {
+                padding: 12px;
+            }
+
+            .tweet-profile img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .tweet-profile p {
+                font-size: 14px;
+            }
+
+            .tweet-title {
+                font-size: 14px;
+            }
+
+            .tweet-description {
+                font-size: 13px;
+            }
+
+            .tweet-stats {
+                font-size: 12px;
+            }
+
+            .tweet-url {
+                font-size: 13px;
+            }
+
+            .tweet-date {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tweet-container">
+        <div class="tweet-profile">
+            <img src="{{ tweet.profile_pic }}" alt="Profile Picture">
+            <p>{{ tweet.username }}</p>
+        </div>
+        <p class="tweet-title">
+            <b>{{ tweet.title }}</b> (id: {{ tweet.id }})
+        </p>
+        <p class="tweet-description">
+            {{ tweet.description }}
+        </p>
+        <div class="tweet-stats">
+            <p><b>Likes:</b> {{ tweet.likes }}</p>
+            <p><b>Retweets:</b> {{ tweet.retweets }}</p>
+            <p><b>Hashtags:</b> {{ tweet.hashtags }}</p>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <p>
+                <a href="{{ tweet.url }}" class="tweet-url">
+                    {{ tweet.url | truncate(50, True, "...") }}
+                </a>
+            </p>
+            <p class="tweet-date">
+                <b>Date:</b> {{ tweet.doc_date }}
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}
